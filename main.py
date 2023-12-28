@@ -3,12 +3,12 @@ from roboflow import Roboflow
 import numpy as np
 
 
-def load_image(file_path):
+def read_parking_lot_image(file_path):
     image = cv2.imread(file_path)
     return image
 
 
-def draw_spots(image, parking_spots, predictions):
+def annotate_and_identify_occupied_spots(image, parking_spots, predictions):
     occupied_spots = []
     for spot in parking_spots:
         spot_points = np.array(spot, np.int32)
@@ -38,26 +38,26 @@ def draw_spots(image, parking_spots, predictions):
     return occupied_spots
 
 
-def display_image(image):
+def show_annotated_parking_image(image):
     cv2.imshow("Parking Spots", image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 
-def model_prediction(api_key, project_name, image_path, parking_spots):
+def process_parking_lot_image(api_key, project_name, image_path, parking_spots):
     rf = Roboflow(api_key=api_key)
     project = rf.workspace().project(project_name)
     model = project.version(1).model
 
-    # Predict using the model
+    # Predict using the pretrained model
     response = model.predict(image_path, confidence=10, overlap=40)
     predictions = response.json()['predictions']
 
-    image = load_image(image_path)
+    image = read_parking_lot_image(image_path)
 
     if image is not None:
-        draw_spots(image, parking_spots, predictions)
-        display_image(image)
+        annotate_and_identify_occupied_spots(image, parking_spots, predictions)
+        show_annotated_parking_image(image)
     else:
         print("Error: The image could not be loaded.")
 
@@ -80,4 +80,4 @@ parking_spots = [
     [(711, 285), (735, 285), (723, 268), (702, 268)],
 ]
 
-model_prediction(api_key, project_name, image_path, parking_spots)
+process_parking_lot_image(api_key, project_name, image_path, parking_spots)
