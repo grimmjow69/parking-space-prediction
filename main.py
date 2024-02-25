@@ -2,6 +2,8 @@ import json
 
 import cv2
 from roboflow import Roboflow
+from ultralytics import YOLO
+
 from parking_spot import ParkingSpot
 from parking_spot_result import ParkingSpotResult
 
@@ -22,14 +24,13 @@ def annotate_and_identify_occupied_spots(image, parking_spots, predictions):
         color = (0, 255, 0)
 
         for pred in predictions:
-            if pred['class_id'] == 0:  # Assuming class_id 0 is a car
-                point = (int(pred['x']), int(pred['y']))
+            point = (int(pred['x']), int(pred['y']))
 
-                # Check if the point is inside the polygon
-                if cv2.pointPolygonTest(spot_polygon, point, False) >= 0:
-                    color = (0, 0, 255)  # Car detected, change color of spot to red
-                    occupied = True
-                    break  # No need to check other predictions for this spot
+            # Check if the point is inside the polygon
+            if cv2.pointPolygonTest(spot_polygon, point, False) >= 0:
+                color = (0, 0, 255)  # Car detected, change color of spot to red
+                occupied = True
+                break  # No need to check other predictions for this spot
 
         # Drawing of parking spot
         cv2.polylines(image, [spot_polygon], isClosed=True, color=color, thickness=1)
@@ -44,14 +45,19 @@ def show_annotated_parking_image(image):
     cv2.destroyAllWindows()
 
 
-def process_parking_spot_image(api_key, project_name, image_path, parking_spots):
-    rf = Roboflow(api_key=api_key)
-    project = rf.workspace().project(project_name)
-    model = project.version(1).model
+def process_parking_spot_image(image_path, parking_spots):
+    model = YOLO('best_model.pt')
+    classes = [0]
+    results = model(image_path, conf=0.05, classes=classes, iou=0.2, imgsz=640)
 
-    # Predict using the pretrained model from roboflow
-    response = model.predict(image_path, confidence=1, overlap=80)
-    predictions = response.json()['predictions']
+    predictions = []
+    for result in results:
+        boxes = result.boxes  # Boxes object for bounding box outputs
+        for box in boxes.xyxy:
+            x_center = int((box[0] + box[2]) / 2)
+            y_center = int((box[1] + box[3]) / 2)
+            prediction = {'x': x_center, 'y': y_center}
+            predictions.append(prediction)
 
     image = read_parking_spot_image(image_path)
 
@@ -63,9 +69,6 @@ def process_parking_spot_image(api_key, project_name, image_path, parking_spots)
         print("Error: The image could not be loaded.")
 
 
-# Example of usage
-api_key = "..."
-project_name = "car_detection-l1xo4"
 image_path = "images/zalivautickadenzasnezene2.png"
 
 # Example of few manually marked spots
@@ -96,7 +99,8 @@ parking_spots = [
     ParkingSpot("Spot24", [[720, 375], [872, 375], [872, 428], [720, 428]])
 ]
 
-occupancy_result = process_parking_spot_image(api_key, project_name, image_path, parking_spots)
-json_result = json.dumps([obj.__dict__ for obj in occupancy_result])
+res = process_parking_spot_image(image_path, parking_spots)
+json_result = json.dumps(res, default=lambda x: x.__dict__)
 
+# Display the JSON result
 print(json_result)
