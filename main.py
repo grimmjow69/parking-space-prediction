@@ -77,7 +77,6 @@ def get_model_predications_result(image):
 
     for result in results:
         boxes = result.boxes
-        result.show()
         for box in boxes.xyxy:
             x_center = int((box[0] + box[2]) / 2)
             y_center = int((box[1] + box[3]) / 2)
