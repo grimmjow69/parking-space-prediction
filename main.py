@@ -13,37 +13,38 @@ app = Flask(__name__)
 
 parking_areas = {
     'zaliv_a': {
-        'url': '',
-        'images': [
-            'images/zaliv_a_snow.png',
-            'images/zaliv_a_day.png',
-            'images/zaliv_a_light_snow.png',
-        ],
+        'url': 'http://user:eltodo@158.193.166.34/snap.jpg',
         'spots': [
-            ParkingSpot("spot_1", [[732, 339], [895, 339], [895, 409], [732, 409]]),
-            ParkingSpot("spot_2", [[767, 258], [897, 258], [897, 307], [767, 307]]),
-            ParkingSpot("spot_3", [[1029, 251], [1168, 251], [1168, 299], [1029, 299]]),
-            ParkingSpot("spot_4", [[1040, 290], [1188, 290], [1188, 337], [1040, 337]]),
-            ParkingSpot("spot_5", [[1047, 331], [1205, 331], [1205, 387], [1047, 387]]),
-            ParkingSpot("spot_6", [[1071, 373], [1203, 373], [1203, 417], [1071, 417]]),
-            ParkingSpot("spot_7", [[1082, 409], [1230, 409], [1230, 461], [1082, 461]]),
-            ParkingSpot("spot_8", [[1077, 449], [1246, 449], [1246, 505], [1077, 505]]),
-            ParkingSpot("spot_9", [[1084, 488], [1255, 488], [1255, 558], [1084, 558]]),
-            ParkingSpot("spot_10", [[1101, 539], [1277, 539], [1277, 634], [1101, 634]]),
-            ParkingSpot("spot_11", [[1100, 627], [1296, 627], [1296, 713], [1100, 713]]),
-            ParkingSpot("spot_12", [[1113, 702], [1310, 702], [1310, 786], [1113, 786]]),
-            ParkingSpot("spot_13", [[1114, 772], [1330, 772], [1330, 877], [1114, 877]]),
-            ParkingSpot("spot_14", [[1136, 874], [1368, 874], [1368, 1023], [1136, 1023]]),
-            ParkingSpot("spot_15", [[578, 972], [827, 972], [827, 1048], [578, 1048]]),
-            ParkingSpot("spot_16", [[582, 859], [825, 859], [825, 976], [582, 976]]),
-            ParkingSpot("spot_17", [[608, 765], [822, 765], [822, 868], [608, 868]]),
-            ParkingSpot("spot_18", [[628, 686], [834, 686], [834, 775], [628, 775]]),
-            ParkingSpot("spot_19", [[650, 620], [847, 620], [847, 696], [650, 696]]),
-            ParkingSpot("spot_20", [[651, 544], [859, 544], [859, 627], [651, 627]]),
-            ParkingSpot("spot_21", [[670, 494], [860, 494], [860, 581], [670, 581]]),
-            ParkingSpot("spot_22", [[682, 448], [861, 448], [861, 526], [682, 526]]),
-            ParkingSpot("spot_23", [[698, 405], [856, 405], [856, 464], [698, 464]]),
-            ParkingSpot("spot_24", [[720, 375], [872, 375], [872, 428], [720, 428]])
+            ParkingSpot("FRONT_D_1", [[673, 297], [722, 297], [722, 341], [673, 341]]),
+            ParkingSpot("FRONT_D_2", [[717, 299], [769, 299], [769, 338], [717, 338]]),
+            ParkingSpot("FRONT_D_3", [[767, 294], [822, 294], [822, 339], [767, 339]]),
+            ParkingSpot("FRONT_D_4", [[818, 298], [867, 298], [867, 339], [818, 339]]),
+            ParkingSpot("FRONT_D_5", [[864, 292], [927, 292], [927, 337], [864, 337]]),
+            ParkingSpot("FRONT_D_6", [[919, 289], [973, 289], [973, 340], [919, 340]]),
+            ParkingSpot("FRONT_D_7", [[969, 285], [1029, 285], [1029, 336], [969, 336]]),
+            ParkingSpot("FRONT_D_8", [[1032, 282], [1081, 282], [1081, 334], [1032, 334]]),
+            ParkingSpot("FRONT_D_9", [[1083, 285], [1130, 285], [1130, 338], [1083, 338]]),
+            ParkingSpot("FRONT_D_10", [[1131, 282], [1187, 282], [1187, 336], [1131, 336]]),
+            ParkingSpot("FRONT_D_11", [[1190, 282], [1247, 282], [1247, 343], [1190, 343]]),
+            # ParkingSpot("RAD6_1", [[1843, 741], [1911, 741], [1911, 816], [1843, 816]]),
+            # ParkingSpot("RAD6_2", [[1803, 654], [1911, 654], [1911, 741], [1803, 741]]),
+            # ParkingSpot("RAD6_3", [[1768, 593], [1911, 593], [1911, 683], [1768, 683]]),
+            # ParkingSpot("RAD6_4", [[1721, 551], [1911, 551], [1911, 646], [1721, 646]]),
+            # ParkingSpot("RAD6_5", [[1710, 519], [1911, 519], [1911, 598], [1710, 598]]),
+            # ParkingSpot("RAD6_6", [[1674, 505], [1910, 505], [1910, 578], [1674, 578]]),
+            # ParkingSpot("RAD6_7", [[1664, 479], [1901, 479], [1901, 553], [1664, 553]]),
+            # ParkingSpot("RAD6_8", [[1633, 455], [1862, 455], [1862, 526], [1633, 526]]),
+            # ParkingSpot("RAD6_9", [[1606, 434], [1811, 434], [1811, 510], [1606, 510]]),
+            # ParkingSpot("RAD6_10", [[1596, 431], [1792, 431], [1792, 488], [1596, 488]]),
+            # ParkingSpot("RAD6_11", [[1583, 421], [1796, 421], [1796, 473], [1583, 473]]),
+            # ParkingSpot("RAD6_12", [[1569, 395], [1771, 395], [1771, 450], [1569, 450]]),
+            # ParkingSpot("RAD6_13", [[1564, 384], [1788, 384], [1788, 435], [1564, 435]]),
+            # ParkingSpot("RAD6_14", [[1545, 371], [1744, 371], [1744, 417], [1545, 417]]),
+            # ParkingSpot("RAD6_15", [[1542, 356], [1710, 356], [1710, 408], [1542, 408]]),
+            # ParkingSpot("RAD6_16", [[1519, 335], [1678, 335], [1678, 385], [1519, 385]]),
+            # ParkingSpot("RAD6_17", [[1509, 321], [1639, 321], [1639, 364], [1509, 364]]),
+            # ParkingSpot("RAD6_18", [[1488, 311], [1625, 311], [1625, 357], [1488, 357]]),
+            # ParkingSpot("RAD6_19", [[1478, 303], [1614, 303], [1614, 349], [1478, 349]])
         ]
     }
 }
@@ -69,13 +70,14 @@ def evaluate_occupied_spots_in_area(parking_spots, predictions):
 
 
 def get_model_predications_result(image):
-    model = YOLO('best_model.pt')
-    classes = [0]
-    results = model(image, conf=0.1, classes=classes, iou=0.3, imgsz=640)
+    model = YOLO('best.pt')
+    results = model(image, conf=0.3, iou=0.7)
 
     predictions = []
+
     for result in results:
         boxes = result.boxes
+        result.show()
         for box in boxes.xyxy:
             x_center = int((box[0] + box[2]) / 2)
             y_center = int((box[1] + box[3]) / 2)
@@ -90,23 +92,16 @@ def get_parking_occupancy():
     all_occupancy_results = {}
 
     for area, details in parking_areas.items():
-        # url = details['url']
+        url = details['url']
         spots = details['spots']
-        images = details['images']
-        image = random.choice(images)
 
-        # response = requests.get(url)
+        response = requests.get(url)
 
-        # if response.status_code != 200:
-        #     continue
-        #
-        # image_data = response.json().get('image_base64')
-        # if not image_data:
-        #     continue
+        if response.status_code != 200:
+            continue
 
-        # image_bytes = base64.b64decode(image_data)
-        # image_array = np.frombuffer(image_bytes, dtype=np.uint8)
-        # image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
+        image_array = np.asarray(bytearray(response.content), dtype=np.uint8)
+        image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
 
         if image is not None:
             roboflow_predictions = get_model_predications_result(image)
