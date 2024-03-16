@@ -26,7 +26,7 @@ def draw_rectangle(event, x, y, flags, param):
         cv2.imshow('Image', img_copy)
 
 
-img = cv2.imread('images/snap.jpg')
+img = cv2.imread('images/...')
 
 cv2.imshow('Image', img)
 
@@ -40,10 +40,10 @@ while True:
 
 rectangles_formatted = [
     [
-        (rect[0][0], rect[0][1]),  # bottom-left
-        (rect[1][0], rect[0][1]),  # bottom-right
-        (rect[1][0], rect[1][1]),  # top-right
-        (rect[0][0], rect[1][1])  # top-left
+        [rect[0][0], rect[0][1]],  # bottom-left
+        [rect[1][0], rect[0][1]],  # bottom-right
+        [rect[1][0], rect[1][1]],  # top-right
+        [rect[0][0], rect[1][1]]  # top-left
     ]
     for rect in rectangles
 ]
