@@ -1,15 +1,18 @@
-from flask import Flask, request, jsonify
+from flask import Flask
+from flask_httpauth import HTTPBasicAuth
 import cv2
 import numpy as np
 import requests
-import random
+import os
+from dotenv import load_dotenv
 from ultralytics import YOLO
 
 from parking_spot import ParkingSpot
 from parking_spot_result import ParkingSpotResult
-import base64
 
 app = Flask(__name__)
+auth = HTTPBasicAuth()
+load_dotenv()
 
 parking_areas = {
     'zaliv_a': {
@@ -114,7 +117,6 @@ def get_model_predications_result(image):
     predictions = []
 
     for result in results:
-        result.show();
         boxes = result.boxes
         for box in boxes.xyxy:
             x_center = int((box[0] + box[2]) / 2)
@@ -125,7 +127,18 @@ def get_model_predications_result(image):
     return predictions
 
 
+@auth.verify_password
+def verify_password(username, password):
+    expected_username = os.environ.get('PPM_AUTH_USERNAME')
+    expected_password = os.environ.get('PPM_AUTH_PASSWORD')
+
+    if username == expected_username and password == expected_password:
+        return True
+    return False
+
+
 @app.route('/get_parking_occupancy', methods=['GET'])
+@auth.login_required
 def get_parking_occupancy():
     all_occupancy_results = {}
 
